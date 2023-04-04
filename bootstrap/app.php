@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use Amp\Http\Client\HttpClient;
+use Amp\Http\Client\HttpClientBuilder;
 use Amp\Log\ConsoleFormatter;
 use Amp\Log\StreamHandler;
 use Amp\Mysql\MysqlConfig;
@@ -63,6 +65,9 @@ $container->singleton(LoggerInterface::class, function ($app) {
 		->useLoggingLoopDetection(false);
 });
 
+// Http
+$container->singleton(HttpClient::class, fn () => HttpClientBuilder::buildDefault());
+
 // MySQL facilities
 $container->bind(SqlConfig::class, function ($app) {
 	$config = $app['config']->get('database');
@@ -90,6 +95,7 @@ $container->singleton(ConnectionPool::class, function ($app) {
 $container->alias(Environment::class, 'env');
 $container->alias(Configuration::class, 'config');
 $container->alias(LoggerInterface::class, 'log');
+$container->alias(HttpClient::class, 'http');
 $container->alias(ConnectionPool::class, 'db');
 
 return $container;

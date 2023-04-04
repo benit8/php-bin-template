@@ -12,6 +12,7 @@
         "php": ">=8.1",
         "amphp/amp": "^3",
         "amphp/file": "^3",
+        "amphp/http-client": "^5",
         "amphp/log": "^2",
         "amphp/mysql": "^3",
         "illuminate/config": "^10",
