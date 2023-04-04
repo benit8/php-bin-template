@@ -1,0 +1,6 @@
+[Unit]
+Description=PHP bin template
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/php /opt/php-bin-template/bin/script

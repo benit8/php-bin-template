@@ -1,0 +1,22 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+use PhpBinTemplate\Application;
+
+// -----------------------------------------------------------------------------
+
+require_once \dirname(__DIR__) . '/vendor/autoload.php';
+
+$kernel = require_once \dirname(__DIR__) . '/bootstrap/app.php';
+
+// -----------------------------------------------------------------------------
+
+$app = $kernel->make(Application::class);
+
+$startTime = new DateTimeImmutable();
+$kernel['log']->info('Application started', ['time' => $startTime]);
+
+$kernel->call($app->run(...));
+
+$duration = (new DateTimeImmutable())->diff($startTime)->format('%im %ss %fms');
+$kernel['log']->info('Application finished', ['duration' => $duration]);
